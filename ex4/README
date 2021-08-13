@@ -1,0 +1,227 @@
+=====================================================================
+
+file:ex4a1.c
+
+                Bingo board holder
+====================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+The program Defines an array of integers of fifty thousand cells,
+and inserts into the array numbers in the range of zero to two
+hundred thousand (not including two hundred thousand).
+The purpose of the program is to delete the numbers in the array,
+using numbers it receives from other programs.
+The program receives through the argument vector the name of
+the pipe it will use, and these names of the children.
+
+         	          
+compile:gcc -Wall ex4a1.c -o ex4a1
+Run:./ex4a1 fifo0 fifo1 fifo2 fifo3
+
+note: If you want to run this program  u should compile
+      & run ex4a2.c 3. time. each time the process will
+      communicte with this program via another fifo.
+      The names of the queues will be fifo0...fifo3.
+      when fifo0 is the fifo with the process communicte
+      write to this program.
+
+Input: No input.
+ 
+Output: the output will be(seperated by spaces):
+        1. The time it took to delete all the numbers from the 
+           array.
+        2. the amout of numbers that the process got sent.
+            (i.e. how many try of deletion from the array).
+        3. The size of the array assigned to the program.
+
+=====================================================================
+
+file:ex4a2.c
+
+                Number manufacturers
+====================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+This program receives through the argument vector the name of the
+queue and fifo0, and the number of the current process (1,2,3)
+which will also determine the name of the queue file through which 
+the current process will receive feedback on whether the number it
+sent to plan A was received / rejected The one that runs will be 
+given a different name)
+
+         	          
+compile:gcc -Wall ex4a2.c -o ex4a2
+Run:./ex4a2 fifo0 <num>
+
+note: you need to send make 3 process of ex4a2, to each one send 
+      his own number.
+
+Input: No input.
+ 
+Output: the output will be:
+        1. the amout of numbers that the process sent.
+         (i.e. how many try of deletion from the array).
+        2. The amount of successfull deletions.
+
+        note: the output will be seperated by spaces.
+
+=====================================================================
+
+===============================================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+File    : ex4b1.c
+description:
+The program recive numbers with the messege queue from N programs 
+and send  them is the apeared in the array of number 
+that was stored it and print in the end how many number
+were correct , how many number have been recived by the player ,
+and how much time it took to guess all the numbers.
+  	 
+-------------------------------------------------------------------------------
+Compile : gcc -Wall ex4b1.c -o ex4b1 
+Run     : ./exb4b1 0
+
+Input: seed rand number in vector argument.
+
+Output:  -number been sent to ex4b1.c program.
+ 	 -number of right guesses.
+ 	 -time to solve the bingo.
+===============================================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+File    : ex4b2.c
+description:
+
+The program pick a random number and send it by messege queue
+to the numbers holder program ,and print in the end how many number
+were correct ,and how many number have been recived by the player.
+  	 
+-------------------------------------------------------------------------------
+Compile : gcc -Wall ex4b2.c -o ex4b2 
+Run     : ./ex4b2 <num> 
+note: only after running ./ex4b1 0
+
+Input: none
+ 
+Output:
+-number been sent to ex4b1.c program.
+-number of right guesses.
+ 
+
+===============================================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+File    : ex4c1.c
+description:
+
+Register server program
+The program register manage users in the server,
+if user requested to sign up the server will register him
+if he is already register the server will send messege he is already
+registered,if no space left the server will notify about that, 
+the server operate according to the following requsted type.
+'1' - register the user/pid.
+'2' - check if the giving pid exist.
+'3' - sign out the givin pid.
+  	 
+-------------------------------------------------------------------------------
+Compile : gcc -Wall ex4c1.c -o ex4c1 
+Run     : ./ex4c1
+
+Input:None
+  
+Output:according to the requsted operation
+register the user: 
+0-user added succseffuly,
+1-user already exist,
+2-no space
+check if user exits:
+0 - not existed.
+1 - existed. 
+
+===============================================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+File    : ex4c2.c
+description:
+
+ Server application
+ The program check if the giving str by messege queue is palindrom
+ or prime numbe from the cliend,before doing the checking the data,
+ the server check if the giving client is registered, if not the server
+ return -1 answer.
+ 
+ input:operation type
+ 1 - check if the number is prime or not.
+ 2 - check if the giving str is palindrom.
+ 
+ output:according to the operation
+ 1 - prime or not prime.
+ 2 - palindrom or not palindrom. 
+ user not registered - "-1"  	 
+-------------------------------------------------------------------------------
+Compile : gcc -Wall ex4c2.c -o ex4c2 
+Run     : run ./ex4c2 after ./ex4c1.c
+
+Input:
+None
+  
+Output:according to the requsted operation
+register the user: 
+0-user added succseffuly,
+1-user already exist,
+2-no space
+check if user exits:
+0 - not existed.
+1 - existed. 
+
+===============================================================================
+Written by:
+David Sapir, id = 208917351, login = davidsa
+Shimshon Polak, id = 315605642, login = shimshonpo
+
+File    : ex4c3.c
+description:
+
+Client program
+The program communicate with register,and application server.
+the program first register the client(process) in the register
+server and then wait for user input command and input accordinly
+to the input command,the following input recived
+from the user are:
+'n' - for number input
+'s' - for the string input to recive.
+'e' - to sign out from the register server and exit.
+
+if n recived,the client send to the application server to 
+check if the data is prime.
+if s recived, the client send to the application sercer to
+check if the string is palindrom.
+-------------------------------------------------------------------------------
+Compile : gcc -Wall ex4c3.c -o ex4c3 
+Run     : run ./ex4c3.c after ./ex4c2.c and ./ex4c1.c
+
+Input:char and input according to inserted char
+ n - number
+ s - string
+ e - exit program
+
+Output:according to the operation
+ 1 - prime or not prime.
+ 2 - palindrom or not palindrom. 
+ user not registered - "-1"  	
+
+===============================================================================
